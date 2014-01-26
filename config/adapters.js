@@ -23,7 +23,7 @@ module.exports.adapters = {
     module   : 'sails-mongo',
     host     : 'localhost',
     port     : 27017,
-    user     : 'hluteam',
+    user     : 'teamhlu',
     password : 'T1tct!utle',
     database : 'hlu_forum'
   },
