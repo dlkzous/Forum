@@ -30,6 +30,8 @@ Create a new user with the following command:
 mongo> db.addUser( {user: "team", pwd: "password", roles: ["readWrite", "dbAdmin"] })
 ```
 
+Install the grunt sails linker as is shown here https://github.com/Zolmeister/grunt-sails-linker
+
 Ensure that the mongo daemon is running before running the following command:
 ```
 sails lift
