@@ -136,6 +136,21 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
+      
+    'sails-linker': {
+      defaultOptions: {
+        options: {
+          startTag: '<!--SCRIPTS-->',
+          endTag: '<!--SCRIPTS END-->',
+          fileTmpl: '<script src="%s"></script>',
+          appRoot: 'app/'
+        },
+        files: {
+          // Target-specific file lists and/or options go here.
+          'app/index.html': ['app/scripts/**/*.js']
+        },
+      }
+    },
     pkg: grunt.file.readJSON('package.json'),
 
     copy: {
@@ -481,4 +496,5 @@ module.exports = function (grunt) {
   //     console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
   //   });
   // });
+  grunt.loadNpmTasks('grunt-sails-linker');
 };
