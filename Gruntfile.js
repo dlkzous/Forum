@@ -55,9 +55,12 @@ module.exports = function (grunt) {
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
     'linker/js/app.js',
+      
+    'linker/js/jquery.js',
+    'linker/js/jquery.min.js',
+    'linker/js/bootstrap.js',
 
     // *->    put other dependencies here   <-*
-
     // All of the rest of your app scripts imported here
     'linker/**/*.js'
   ];
@@ -136,21 +139,6 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-      
-    'sails-linker': {
-      defaultOptions: {
-        options: {
-          startTag: '<!--SCRIPTS-->',
-          endTag: '<!--SCRIPTS END-->',
-          fileTmpl: '<script src="%s"></script>',
-          appRoot: 'app/'
-        },
-        files: {
-          // Target-specific file lists and/or options go here.
-          'app/index.html': ['app/scripts/**/*.js']
-        },
-      }
-    },
     pkg: grunt.file.readJSON('package.json'),
 
     copy: {
@@ -161,6 +149,12 @@ module.exports = function (grunt) {
           cwd: './assets',
           src: ['**/*.!(coffee)'],
           dest: '.tmp/public'
+        },
+        {
+            expand: true,
+            cwd: './assets/linker/fonts',
+            src: ['**/*'],
+            dest: '.tmp/public/fonts'
         }
         ]
       },
