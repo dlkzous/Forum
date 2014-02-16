@@ -27,21 +27,34 @@ var UsersController = {
 
   signup: function( req, res ) {
     res.locals.flash = _.clone(req.session.flash);
-    return res.view();
+    var errorsList = {};
+    if ( res.locals.flash && res.locals.flash.err && res.locals.flash.err.ValidationError )
+    {
+        errorsList = res.locals.flash.err.ValidationError;
+        return res.view({errors: errorsList, data:res.locals.flash.data});
+    } else {
+        return res.view({errors: false});
+    }
     req.session.flash = {};
   },
 
   create: function( req, res, next ) {
+    var formData = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+    };
     Users.create( req.params.all(), function userCreated( err, user ) {
       if( err )
       {
         console.log( err );
           req.session.flash = {
-              err: err
+              err: err,
+              data:formData
           };
         return res.redirect('Users/signup');
       }
-      return res.view("Users/index");
+      return res.redirect("Users/index");
       req.session.flash = {};
     });
   }

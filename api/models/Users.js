@@ -11,7 +11,8 @@ var User = {
     userID: 'INTEGER',
     password:{
       type:  'string',
-      alphanumeric: true
+      alphanumeric: true,
+      required: true
     },
     firstName: {
       type: 'string',

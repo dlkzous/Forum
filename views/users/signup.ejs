@@ -6,25 +6,53 @@
               <form class="bs-example form-horizontal" method="post" action="create">
                 <fieldset>
                   <legend>Register</legend>
+                  <% if(errors && errors.firstName) { %>
+                  <div class="form-group has-error">
+                  <% } else { %>
                   <div class="form-group">
+                  <% } %>
                     <label for="firstName" class="col-lg-3 control-label">First Name</label>
                     <div class="col-lg-8">
+                      <% if(errors) { %>
+                      <input type="text" class="form-control" id="firstName" name="firstName" value="<%= data.firstName %>">
+                      <% } else { %>
                       <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+                      <% } %>
                     </div>
                   </div>
+                  <% if(errors && errors.lastName) { %>
+                  <div class="form-group has-error">
+                  <% } else { %>
                   <div class="form-group">
+                  <% } %>
                     <label for="lastName" class="col-lg-3 control-label">Last Name</label>
                     <div class="col-lg-8">
+                      <% if(errors) { %>
+                      <input type="text" class="form-control" id="lastName" name="lastName" value="<%= data.lastName %>">
+                      <% } else { %>
                       <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
+                      <% } %>
                     </div>
                   </div>
+                  <% if(errors && errors.email) { %>
+                  <div class="form-group has-error">
+                  <% } else { %>
                   <div class="form-group">
+                  <% } %>
                     <label for="email" class="col-lg-3 control-label">Email</label>
                     <div class="col-lg-8">
+                      <% if(errors) { %>
+                      <input type="text" class="form-control" id="email" name="email" value="<%= data.email %>">
+                      <% } else { %>
                       <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                      <% } %>
                     </div>
                   </div>
+                  <% if(errors && errors.password) { %>
+                  <div class="form-group has-error">
+                  <% } else { %>
                   <div class="form-group">
+                  <% } %>
                     <label for="password" class="col-lg-3 control-label">Password</label>
                     <div class="col-lg-8">
                       <input type="password" class="form-control" id="password" name="password" placeholder="Password">
