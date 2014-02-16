@@ -11,7 +11,7 @@ var User = {
     userID: 'INTEGER',
     password:{
       type:  'string',
-      alphaNumeric: true
+      alphanumeric: true
     },
     firstName: {
       type: 'string',
@@ -29,7 +29,9 @@ var User = {
       type: 'email',
       required: true
     }
-  },
+  }
+    
+  /*
   beforeCreate: function( attrs, next ) {
     var bcrypt = require('bcrypt');
     bcrypt.genSalt( 10, function( err, salt ) {
@@ -42,6 +44,7 @@ var User = {
       });
     });
   }
+  */
 };
 
 module.exports = User;

@@ -15,16 +15,31 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-module.exports = {
-    
-  
+var UsersController = {
 
+  index: function( req, res ) {
+    return res.view();
+  },
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to UsersController)
-   */
-  _config: {}
+  signup: function( req, res ) {
+    res.locals.flash = _.clone(req.session.flash);
+    return res.view();
+    req.session.flash = {};
+  },
 
-  
-};
+  create: function( req, res, next ) {
+    Users.create( req.params.all(), function userCreated( err, user ) {
+      if( err )
+      {
+        console.log( err );
+          req.session.flash = {
+              err: err
+          };
+        return res.redirect('Users/signup');
+      }
+      return res.view("Users/index");
+      req.session.flash = {};
+    });
+  }
+}
+module.exports = UsersController;
