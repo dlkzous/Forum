@@ -18,7 +18,11 @@
 var UsersController = {
 
   index: function( req, res ) {
-    return res.view();
+    var usersList = {}; 
+    Users.find().exec( function( err, users ) {
+        usersList = users;
+        return res.view({users: usersList});
+    });
   },
 
   signup: function( req, res ) {
