@@ -36,3 +36,14 @@ Ensure that the mongo daemon is running before running the following command:
 ```
 sails lift
 ```
+
+In order to use node-inspector as a debugger, run the application as follows:
+
+```
+node --debug app.js
+```
+
+Then run node inspector as follows:
+```
+node-debug app.js
+```
