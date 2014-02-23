@@ -7,12 +7,17 @@
  */
 
 var User = {
+
+  /**
+   * Attributes list for the user
+   * @type {Object}
+   */
   attributes: {
-    userID: 'INTEGER',
     password:{
       type:  'string',
       alphanumeric: true,
-      required: true
+      required: true,
+      minLength: 6
     },
     firstName: {
       type: 'string',
@@ -28,11 +33,18 @@ var User = {
     },
     email: {
       type: 'email',
+      unique: true,
       required: true
     }
-  }
-    
-  /*
+  },
+  
+  /**
+   * Function that hashes a password
+   * @param  {Object}   attrs - user attributes list
+   * @param  {Function} next  [description]
+   * @return {[type]}         [description]
+   */
+  
   beforeCreate: function( attrs, next ) {
     var bcrypt = require('bcrypt');
     bcrypt.genSalt( 10, function( err, salt ) {
@@ -45,7 +57,7 @@ var User = {
       });
     });
   }
-  */
+  
 };
 
 module.exports = User;
