@@ -21,7 +21,6 @@ var UsersController = {
    * Function that lists all the users currently registered
    */
   index: function( req, res ) {
-    res.locals.user = _.clone( req.session.user )
     var usersList = {}; 
     Users.find().exec( function( err, users ) {
         usersList = users;
@@ -33,7 +32,6 @@ var UsersController = {
    * Function that handles the singup page 
    */
   signup: function( req, res ) {
-    res.locals.user = _.clone( req.session.user )
     // Get errors from session flash
     res.locals.flash = _.clone(req.session.flash);
     req.session.flash = {};
@@ -54,7 +52,6 @@ var UsersController = {
    * Function that creates a new user
    */
   create: function( req, res, next ) {
-    res.locals.user = _.clone( req.session.user )
     var formData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -208,7 +205,9 @@ var UsersController = {
               email: user.email
             }
             req.session.user = sessionUser;
-            req.session.authenticated = true;
+            sails.config.userdata.authenticated = true;
+            sails.config.userdata.guest = false;
+            sails.config.userdata.user = sessionUser;
             return res.redirect('Users/index');
           } else {
             // invalid password
