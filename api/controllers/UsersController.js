@@ -95,7 +95,7 @@ var UsersController = {
   login: function( req, res ) {
 
     // Check if user has already been authenticated
-    if( !req.session.user ) {
+    if( !sails.config.userdata.user ) {
 
       res.locals.flash = _.clone( req.session.flash );
       req.session.flash = {};
@@ -235,6 +235,24 @@ var UsersController = {
       req.session.flash = {};
 
     });
+  },
+
+  /**
+   * Function that logs the user out of the system
+   * @param  {[type]} req [description]
+   * @param  {[type]} res [description]
+   * @return {[type]}     [description]
+   */
+  logout: function( req, res ) {
+
+    if( !sails.config.userdata.authenticated ) {
+      return res.redirect('/');
+    } else {
+      sails.config.userdata.user = null;
+      sails.config.userdata.guest = true;
+      sails.config.userdata.authenticated = false;
+      return res.redirect('/');
+    }
   }
 }
 module.exports = UsersController;
